@@ -193,7 +193,6 @@ class MainPanel extends Component {
   
   // Check for win
   checkAll(board, cellAddedInRow) {
-    console.log('cellAdded', cellAddedInRow);
     return this.checkVertical(board, cellAddedInRow) || 
            this.checkHorizontal(board) || 
            this.checkDiagonalRight(board, cellAddedInRow) || 
