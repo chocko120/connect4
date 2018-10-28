@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import '../App.css';
 import Row from './Row';
 import Turn from './Turn';
+import '../App.css';
 
 import { ROWS, COLS, PLAYER_1, PLAYER_2, WINNING_SPOT } from '../constants';
 
 class MainPanel extends Component {
 
-  cellAddedInRow;
+  // cellAddedInRow = 0;
 
   constructor() {
     super();    
@@ -17,6 +17,9 @@ class MainPanel extends Component {
       gameOver: false,
       message: '',
     };
+
+    // Variable to help check the board only in relevant moves
+    this.cellAddedInRow = 0;
     
     // Bind play function to MainPanel component
     this.play = this.play.bind(this);
@@ -130,7 +133,6 @@ class MainPanel extends Component {
     if (cellAddedInRow > 2){
       return null;
     }
-    console.log('Now checking');
     // Check only if row is 3 or greater AND column is 3 or less
     for (let r = 3; r < ROWS; r++) {
       for (let c = 0; c < 4; c++) {
@@ -155,7 +157,6 @@ class MainPanel extends Component {
     if (cellAddedInRow > 2){
       return null;
     }
-    console.log('Now checking');
     // Check only if row is 3 or greater AND column is 3 or greater
     for (let r = 3; r < ROWS; r++) {
       for (let c = 3; c < COLS; c++) {
@@ -180,7 +181,6 @@ class MainPanel extends Component {
     if (cellAddedInRow !== 0){
       return null;
     }
-    console.log('Now checking draw');
     for (let r = 0; r < ROWS; r++) {
       for (let c = 0; c < COLS; c++) {
         if (!board[r][c]) {
@@ -193,6 +193,7 @@ class MainPanel extends Component {
   
   // Check for win
   checkAll(board, cellAddedInRow) {
+    console.log('cellAdded', cellAddedInRow);
     return this.checkVertical(board, cellAddedInRow) || 
            this.checkHorizontal(board) || 
            this.checkDiagonalRight(board, cellAddedInRow) || 
